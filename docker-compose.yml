@@ -4,10 +4,10 @@ services:
   frontend:
     container_name: frontend
     build:
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: ./frontend/DockerFile
     ports:
       - "8080:80"
-      
+
   backend:
     build:
       dockerfile: ./backend/Dockerfile
@@ -26,8 +26,8 @@ services:
     depends_on:
       - postgres
     volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
+      - .:/usr/src/app/backend
+      - /usr/src/app/backend/node_modules
     command: npm run start:prod
     networks:
       - app-net
@@ -36,7 +36,7 @@ services:
     image: postgres:alpine
     restart: always
     shm_size: 128mb
-    container_name: postgres 
+    container_name: postgres
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USERNAME}
